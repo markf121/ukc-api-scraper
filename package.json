@@ -1,0 +1,28 @@
+{
+  "name": "ukc-api-scraper",
+  "description": "",
+  "private": true,
+  "version": "0.1.0",
+  "homepage": "https://github.com/stevoland/ukc-api-scraper",
+  "author": {
+    "name": "stevo (Stephen Collings)",
+    "email": "stevoland@gmail.com",
+    "url": "http://stevoland.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stevoland/ukc-api-scraper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stevoland/ukc-api-scraper/issues"
+  },
+  "main": "app",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies" : {
+    "restify": "*",
+    "cheerio": "*"
+  },
+  "keywords": []
+}
