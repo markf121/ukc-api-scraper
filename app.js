@@ -13,19 +13,32 @@ function scrapeCrag(id, cb) {
 
     //the whole response has been recieved, so we just print it out here
     response.on('end', function () {
-      console.log(str);
-      cb(str);
+      var $ = cheerio.load(str);
+
+      $('#main > div').first().remove();
+      var $area = $('#main a').first();
+      cb(null, {
+        remote_id: id,
+        name: $('h1').text(),
+        area: $area.text(),
+        country: $area.next().text()
+      });
     });
   }
 
   http.request({
-    host: 'www.ukclimbing.com',
-    path: '/crag.php?id=' + id
+    host: 'www-cache.reith.bbc.co.uk',
+    port: '80',
+    path: 'http://www.ukclimbing.com/logbook/crag.php?id=' + id,
+    headers: {
+      Host: "www.ukclimbing.com"
+    }
   }, callback).end();
 }
 
 function respond (req, res, next) {
   scrapeCrag(req.params.id, function (err, data) {
+    //res.setEncoding('utf8');
     res.send(data);
   });
 }
