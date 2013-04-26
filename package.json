@@ -24,5 +24,8 @@
     "restify": "*",
     "cheerio": "*"
   },
+  "devDependencies" : {
+    "hotnode": "*"
+  },
   "keywords": []
 }
