@@ -1,22 +1,64 @@
 var cheerio = require('cheerio'),
-    http = require('http');
+    request = require('request'),
+    iconv = require('iconv');
 
-function scrapeCrag(id, cb) {
-  function callback(response) {
-    var str = '';
+function getTextForBoldTitle ($el) {
+  var $p;
+  var text;
+  var arr = [];
+  $p = $el.parent();
+  $el.remove();
 
-    //another chunk of data has been recieved, so append it to `str`
-    response.on('data', function (chunk) {
-      str += chunk;
-    });
+  while ($p[0] &&
+      $p[0].name.toLowerCase() === 'p' &&
+      !$p.find('b').length) {
 
-    //the whole response has been recieved, so we just print it out here
-    response.on('end', function () {
-      var $ = cheerio.load(str),
+    // Hack for unescaped <
+    // http://www.ukclimbing.com/logbook/crag.php?id=338
+    if ($p.find('p').length) {
+      $p.after($p.find('p').remove());
+    }
+
+    text = $p.text().trim();
+    if (text) {
+      arr.push(text);
+    }
+    $p = $p.next();
+  }
+
+  return arr;
+}
+
+function scrapeCrag (id, cb) {
+  function callback (err, response, body) {
+
+    if (err) {
+      cb(err);
+      return;
+    } else if (response.statusCode >= 400) {
+      cb(new Error('Not found'));
+      return;
+    }
+
+    var ic = new iconv.Iconv('iso-8859-1', 'utf-8');
+    var buf = ic.convert(body);
+    var utf8String = buf.toString('utf-8');
+
+      var $ = cheerio.load(utf8String),
           $main = $('#main');
 
       var imgSrc = $('#map img').attr('src');
-      var location = imgSrc.match(/markers=([-\d\.]+),([-\d\.]+)/);
+      var location = imgSrc ?
+        imgSrc.match(/markers=([-\d\.]+),([-\d\.]+)/) : null;
+
+      var $font = $('#main font[size=1]');
+      var gridRef = null;
+      if ($font) {
+        var matches = $font.text().match(/Grid Ref ([\w]{2} [\d]{6})/);
+        if (matches) {
+          gridRef = matches[1];
+        }
+      }
 
       $('#main > div').first().remove();
       var $area = $('#main a').first();
@@ -25,21 +67,24 @@ function scrapeCrag(id, cb) {
 
       var $b = $main.find('b');
       var features = [];
+      var access_notes = [];
 
       $b.each(function (i, el) {
         var $el = $(el);
-        var $p;
-        var text;
-        if ($el.text() === 'Crag features') {
-          $p = $el.parent();
-          $el.remove();
-          while ($p[0] && $p[0].name.toLowerCase() === 'p' && $p.find('b').text() !== 'Weather forecast') {
-            text = $p.text().trim();
-            if (text) {
-              features.push(text);
+        switch ($el.text() ) {
+          case 'Crag features':
+            features = getTextForBoldTitle($el);
+
+            break;
+          case 'Access notes':
+            var $parent = $el.parent();
+            while ($el.prev().length) {
+              var $prev = $el;
+              $el = $el.prev();
+              $prev.remove();
             }
-            $p = $p.next();
-          }
+            access_notes = $parent.text().replace(/<!--[\s\S]*-->/, '').trim();
+            break;
         }
       });
 
@@ -53,7 +98,9 @@ function scrapeCrag(id, cb) {
           latitude: null,
           longitude: null
         },
-        features: features
+        features: features,
+        access_notes: access_notes,
+        grid_ref: gridRef
       };
 
       if (location) {
@@ -68,7 +115,7 @@ function scrapeCrag(id, cb) {
         var prop = parts.shift().toLowerCase().trim();
         var val = parts.join(' ').trim();
 
-        if (val === '?') {
+        if (val === '?' || val === 'UNKNOWN') {
           val = null;
         }
 
@@ -85,7 +132,7 @@ function scrapeCrag(id, cb) {
             }
             break;
           case 'altitude':
-            if (val !== null) {
+            if (val !== null && val !== 'Tidal') {
               val = parseInt(val, 10);
             }
         }
@@ -94,21 +141,21 @@ function scrapeCrag(id, cb) {
       });
 
       cb(null, ret);
-    });
   }
 
-  http.request({
-    host: 'www-cache.reith.bbc.co.uk',
-    port: '80',
-    path: 'http://www.ukclimbing.com/logbook/crag.php?id=' + id,
-    headers: {
-      Host: "www.ukclimbing.com"
-    }
-  }, callback).end();
+  request.get({
+    url: 'http://www.ukclimbing.com/logbook/crag.php?id=' + id,
+    proxy: 'http://www-cache.reith.bbc.co.uk',
+    encoding: null
+  }, callback);
 }
 
 exports.findById = function (req, res, next) {
   scrapeCrag(req.params.id, function (err, data) {
-    res.send(data);
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
   });
 };
