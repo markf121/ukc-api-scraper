@@ -53,15 +53,29 @@ function scrapeCrag (id, cb) {
 
       var $font = $('#main font[size=1]');
       var gridRef = null;
+      var matches;
       if ($font) {
-        var matches = $font.text().match(/Grid Ref ([\w]{2} [\d]{6})/);
+        matches = $font.text().match(/Grid Ref ([\w]{2} [\d]{6})/);
         if (matches) {
           gridRef = matches[1];
         }
       }
 
       $('#main > div').first().remove();
-      var $area = $('#main a').first();
+      var area = $('#main a').first().text();
+      matches = utf8String.match(new RegExp(area + '</a>, ([\\w ]+)'));
+      var country = null;
+      if (matches) {
+        if (matches[1] === 'USA') {
+          country = matches[1];
+        } else {
+          var arr = matches[1].split(' ');
+          country = '';
+          arr.forEach(function (w) {
+            country += w.substr(0, 1).toUpperCase() + w.substr(1).toLowerCase();
+          });
+        }
+      }
 
       var pairs = $('#main > p').first().text().split('–');
 
@@ -93,7 +107,8 @@ function scrapeCrag (id, cb) {
       var ret = {
         id: parseInt(id, 10),
         name: $('h1').text().trim(),
-        area: $area.text(),
+        area: area,
+        country: country,
         location: {
           latitude: null,
           longitude: null
@@ -145,7 +160,7 @@ function scrapeCrag (id, cb) {
 
   request.get({
     url: 'http://www.ukclimbing.com/logbook/crag.php?id=' + id,
-    proxy: 'http://www-cache.reith.bbc.co.uk',
+    //proxy: 'http://www-cache.reith.bbc.co.uk',
     encoding: null
   }, callback);
 }
