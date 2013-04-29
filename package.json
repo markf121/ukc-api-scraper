@@ -22,7 +22,9 @@
   },
   "dependencies" : {
     "restify": "*",
-    "cheerio": "*"
+    "cheerio": "*",
+    "request": "*",
+    "iconv": "*"
   },
   "devDependencies" : {
     "hotnode": "*"
