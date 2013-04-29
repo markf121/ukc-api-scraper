@@ -82,7 +82,7 @@ function scrapeCrag (id, cb) {
       var $b = $main.find('b');
       var features = [];
       var access_notes = [];
-
+      var bmc_id = null;
       $b.each(function (i, el) {
         var $el = $(el);
         switch ($el.text() ) {
@@ -92,12 +92,27 @@ function scrapeCrag (id, cb) {
             break;
           case 'Access notes':
             var $parent = $el.parent();
+            var $anchors = $el.siblings('a');
+            $anchors.each(function (i, a) {
+              var $el = $(a);
+              var match = $el.attr('href').match(/http:\/\/www\.thebmc\.co\.uk\/modules\/RAD\/ViewCrag\.aspx\?id=([\d]+)$/);
+              if (match) {
+                bmc_id = parseInt(match[1], 10);
+              }
+            });
+
             while ($el.prev().length) {
               var $prev = $el;
               $el = $el.prev();
               $prev.remove();
             }
-            access_notes = $parent.text().replace(/<!--[\s\S]*-->/, '').trim();
+            var notes = $parent.html().replace(/<!--[\s\S]*-->/, '').trim().split('<br>');
+            notes.forEach(function (line) {
+              line = line.replace(/<([A-Z][A-Z0-9]*)\b[^>]*>(.*?)<\/\1>/i, '').trim();
+              if (line && !line.match(/Read more.../)) {
+                access_notes.push(line);
+              }
+            });
             break;
         }
       });
@@ -115,7 +130,8 @@ function scrapeCrag (id, cb) {
         },
         features: features,
         access_notes: access_notes,
-        grid_ref: gridRef
+        grid_ref: gridRef,
+        bmc_id: bmc_id
       };
 
       if (location) {
