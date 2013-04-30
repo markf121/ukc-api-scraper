@@ -101,12 +101,28 @@ function scrapeCrag (id, cb) {
               }
             });
 
+
+            var $ps = $el.parent().siblings('p');
             while ($el.prev().length) {
               var $prev = $el;
               $el = $el.prev();
               $prev.remove();
             }
             var notes = $parent.html().replace(/<!--[\s\S]*-->/, '').trim().split('<br>');
+            var getParagraphContent = false;
+            $ps.each(function (i, el) {
+              var $el = $(el);
+              if ($el.find('b').length) {
+                getParagraphContent = false;
+              }
+              if (getParagraphContent) {
+                  notes.push($el.text());
+              }
+              if ($el.find('b').text() === 'Guidebooks') {
+                getParagraphContent = true;
+              }
+            });
+
             notes.forEach(function (line) {
               line = line.replace(/<([A-Z][A-Z0-9]*)\b[^>]*>(.*?)<\/\1>/i, '').trim();
               if (line && !line.match(/Read more.../)) {
@@ -176,7 +192,7 @@ function scrapeCrag (id, cb) {
 
   request.get({
     url: 'http://www.ukclimbing.com/logbook/crag.php?id=' + id,
-    //proxy: 'http://www-cache.reith.bbc.co.uk',
+    proxy: 'http://www-cache.reith.bbc.co.uk',
     encoding: null
   }, callback);
 }
