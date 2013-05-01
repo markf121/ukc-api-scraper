@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/stevoland/ukc-api-scraper/issues"
   },
-  "main": "app",
+  "main": "index",
   "engines": {
     "node": "*"
   },
