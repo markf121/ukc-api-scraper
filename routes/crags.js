@@ -61,6 +61,14 @@ function scrapeCrag (id, cb) {
         }
       }
 
+      var lastUpdated = null;
+      $font.each(function (i, el) {
+        matches = $(el).text().match(/These details were last updated on ([\d]{1,2}\/[\w]{3,4}\/[\d]{4})$/);
+        if (matches) {
+          lastUpdated = new Date(Date.parse(matches[1])).toJSON();
+        }
+      });
+
       $('#main > div').first().remove();
       var area = $('#main a').first().text();
       matches = utf8String.match(new RegExp(area + '</a>, ([\\w ]+)'));
@@ -147,7 +155,8 @@ function scrapeCrag (id, cb) {
         features: features,
         access_notes: access_notes,
         grid_ref: gridRef,
-        bmc_id: bmc_id
+        bmc_id: bmc_id,
+        lastUpdated: lastUpdated
       };
 
       if (location) {
