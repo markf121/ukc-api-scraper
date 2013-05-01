@@ -478,3 +478,48 @@ grade
 <option value="572">  - summit</option>
 
 
+
+
+<select name="rocktype">
+<option value="36">Amphibiolite &amp; S</option>
+<option value="29">Andesite</option>
+<option value="35">Artificial</option>
+<option value="22">Basalt</option>
+<option value="33">Chalk</option>
+<option value="38">Conglomerate</option>
+<option value="12">Crumbly rubbish</option>
+<option value="20">Culm</option>
+<option value="32">Diorites</option>
+<option value="14">Dolerite</option>
+<option value="28">Epidiorite</option>
+<option value="16">Gabbro</option>
+<option value="19">Gneiss</option>
+<option value="4">Granite</option>
+<option value="27">Granodiorite</option>
+<option value="10">Greenstone</option>
+<option value="17">Greywacke</option>
+<option value="13">Grit (quarried)</option>
+<option value="5">Gritstone</option>
+<option value="34">Hornstone</option>
+<option value="39">Ice</option>
+<option value="40">Ignimbrite</option>
+<option value="43">Iron Rock</option>
+<option value="23">Killas slate</option>
+<option value="3">Limestone</option>
+<option value="24">Mica schist</option>
+<option value="21">Microgranite</option>
+<option value="26">Pillow lava</option>
+<option value="11">Quartzite</option>
+<option value="6">Rhyolite</option>
+<option value="8">Sandstone (hard)</option>
+<option value="7">Sandstone (soft)</option>
+<option value="18">Schist</option>
+<option value="45">Serpentine</option>
+<option value="9">Shale</option>
+<option value="2">Slate</option>
+<option value="15">Trachyte</option>
+<option value="1" class="error">UNKNOWN</option>
+<option value="44">Volcanic tuff</option>
+<option value="42">Welded Tuff</option>
+<option value="31">Welsh igneous</option>
+</select>
