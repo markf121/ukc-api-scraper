@@ -1,6 +1,6 @@
 var utils = require('../lib/utils'),
     request = require('request'),
-    Country = require('ukc-models/models/Country');
+    RockType = require('ukc-models/models/RockType');
     modelsLib = require('ukc-models/lib');
 
 var j = request.jar();
@@ -11,23 +11,23 @@ utils.scrapePage({
   url: '/logbook/addcrag.html?id=0',
   jar: j
 }, function (err, $, markup) {
+  //console.log(err);
   if (err) {
     console.log(err);
     return;
   }
 
-  $('select[name=country] option').each(function (i, el) {
+  $('select[name=rocktype] option').each(function (i, el) {
     var $el = this;
     var id = parseInt($el.attr('value'), 10);
-    if (id === 0) {
+    if (id === 1) {
       return;
     }
 
     var name = $el.text();
-    modelsLib.updateOrCreate(Country, {
+    modelsLib.updateOrCreate(RockType, {
       id: id,
-      name: name,
-      isUk: ((id >= 1 && id <= 4) || id == 47)
+      name: name
     });
   });
 });
