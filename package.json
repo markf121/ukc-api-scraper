@@ -24,7 +24,8 @@
     "restify": "*",
     "cheerio": "*",
     "request": "*",
-    "iconv": "*"
+    "iconv": "*",
+    "ukc-models": "git+https://github.com/stevoland/ukc-models.git"
   },
   "devDependencies" : {
     "hotnode": "*"
