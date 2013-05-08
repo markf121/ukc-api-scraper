@@ -20,14 +20,15 @@
   "engines": {
     "node": "*"
   },
-  "dependencies" : {
+  "dependencies": {
     "restify": "*",
     "cheerio": "*",
     "request": "*",
     "iconv": "*",
-    "ukc-models": "git+https://github.com/stevoland/ukc-models.git"
+    "ukc-models": "git+https://github.com/stevoland/ukc-models.git",
+    "xml2js": "~0.2.7"
   },
-  "devDependencies" : {
+  "devDependencies": {
     "hotnode": "*"
   },
   "keywords": []
