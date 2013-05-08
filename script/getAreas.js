@@ -5,6 +5,8 @@ var utils = require('../lib/utils'),
     xml2js = require('xml2js'),
     modelsLib = require('ukc-models/lib');
 
+var countries;
+
 var addArea = function (tag, country) {
   var data = {};
   if (!tag.$.value) {
@@ -22,7 +24,7 @@ var addArea = function (tag, country) {
   modelsLib.updateOrCreate(Area, data, function (err, area) {
     country.areas.push(area._id);
     country.save();
-    console.info('Country saved');
+    console.info('Area saved: ' + data.name);
   });
 };
 
@@ -47,15 +49,23 @@ var fetchCountryData = function (country) {
 
         country.save();
       }
+
       if (result.area) {
         result.area.forEach(function (area) {
           addArea(area, country);
         });
+      }
+
+      if (countries.length) {
+        fetchCountryData(countries.pop());
+      } else {
+        console.info('Done');
       }
     });
   });
 };
 
 Country.find({}, function (err, docs) {
-  fetchCountryData(docs[0]);
+  countries = docs;
+  fetchCountryData(countries.pop());
 });
