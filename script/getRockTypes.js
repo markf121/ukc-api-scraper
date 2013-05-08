@@ -1,7 +1,9 @@
 var utils = require('../lib/utils'),
     request = require('request'),
-    RockType = require('ukc-models/models/RockType');
-    modelsLib = require('ukc-models/lib');
+    RockType = require('ukc-models').RockType;
+    modelsLib = require('ukc-models/lib'),
+    mongoose = require('mongoose');
+
 
 var j = request.jar();
 var cookie = request.cookie('ukcsid=11ea35ca4f7c822221338f34303fa208#111303#stevoland');
