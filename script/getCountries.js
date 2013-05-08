@@ -1,6 +1,6 @@
 var utils = require('../lib/utils'),
     request = require('request'),
-    Country = require('ukc-models').Country;
+    Country = require('ukc-models').Country,
     modelsLib = require('ukc-models/lib');
 
 var j = request.jar();
