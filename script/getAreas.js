@@ -12,7 +12,7 @@ var addArea = function (tag, country) {
   if (!tag.$.value) {
     return;
   }
-  data.id = parseInt(tag.$.value, 10);
+  data._id = parseInt(tag.$.value, 10);
   data.name = tag.$.name;
   data.country = country._id;
   if (tag.$.lng && tag.$.lat) {

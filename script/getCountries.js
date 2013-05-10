@@ -25,7 +25,7 @@ utils.scrapePage({
 
     var name = $el.text();
     modelsLib.updateOrCreate(Country, {
-      id: id,
+      _id: id,
       name: name,
       isUk: ((id >= 1 && id <= 4) || id == 47)
     });
