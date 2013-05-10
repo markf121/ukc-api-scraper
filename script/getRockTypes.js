@@ -28,7 +28,7 @@ utils.scrapePage({
 
     var name = $el.text();
     modelsLib.updateOrCreate(RockType, {
-      id: id,
+      _id: id,
       name: name
     });
   });
