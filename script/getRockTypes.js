@@ -29,7 +29,8 @@ utils.scrapePage({
     var name = $el.text();
     modelsLib.updateOrCreate(RockType, {
       _id: id,
-      name: name
+      name: name,
+      updated: Date.now()
     });
   });
 });
