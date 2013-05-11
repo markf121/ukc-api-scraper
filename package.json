@@ -27,7 +27,8 @@
     "iconv": "*",
     "ukc-models": "git+https://github.com/stevoland/ukc-models.git",
     "xml2js": "~0.2.7",
-    "entities": "~0.2.2"
+    "entities": "~0.2.2",
+    "vow": "~0.3.2"
   },
   "devDependencies": {
     "hotnode": "*"

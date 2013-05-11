@@ -12,25 +12,24 @@ j.add(cookie);
 utils.scrapePage({
   url: '/logbook/addcrag.html?id=0',
   jar: j
-}, function (err, $, markup) {
-  //console.log(err);
-  if (err) {
-    console.log(err);
-    return;
-  }
+}).then(
+  function (val) {
+    val.$('select[name=rocktype] option').each(function (i, el) {
+      var $el = this;
+      var id = parseInt($el.attr('value'), 10);
+      if (id === 1) {
+        return;
+      }
 
-  $('select[name=rocktype] option').each(function (i, el) {
-    var $el = this;
-    var id = parseInt($el.attr('value'), 10);
-    if (id === 1) {
-      return;
-    }
-
-    var name = $el.text();
-    modelsLib.updateOrCreate(RockType, {
-      _id: id,
-      name: name,
-      updated: Date.now()
+      var name = $el.text();
+      modelsLib.updateOrCreate(RockType, {
+        _id: id,
+        name: name,
+        updated: Date.now()
+      });
     });
-  });
-});
+  },
+  function (err) {
+    console.log(err);
+  }
+);

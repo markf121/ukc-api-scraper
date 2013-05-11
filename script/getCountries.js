@@ -10,24 +10,25 @@ j.add(cookie);
 utils.scrapePage({
   url: '/logbook/addcrag.html?id=0',
   jar: j
-}, function (err, $, markup) {
-  if (err) {
-    console.log(err);
-    return;
-  }
+}).then(
+  function (obj) {
 
-  $('select[name=country] option').each(function (i, el) {
-    var $el = this;
-    var id = parseInt($el.attr('value'), 10);
-    if (id === 0) {
-      return;
-    }
+    obj.$('select[name=country] option').each(function (i, el) {
+      var $el = this;
+      var id = parseInt($el.attr('value'), 10);
+      if (id === 0) {
+        return;
+      }
 
-    var name = $el.text();
-    modelsLib.updateOrCreate(Country, {
-      _id: id,
-      name: name,
-      isUk: ((id >= 1 && id <= 4) || id == 47)
+      var name = $el.text();
+      modelsLib.updateOrCreate(Country, {
+        _id: id,
+        name: name,
+        isUk: ((id >= 1 && id <= 4) || id == 47)
+      });
     });
-  });
-});
+  },
+  function (err) {
+    console.log(err);
+  }
+);
