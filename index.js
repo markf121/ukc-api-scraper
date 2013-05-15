@@ -1,9 +1,9 @@
-var crag = require('./lib/crag').crag;
+var Scraper = require('./lib/Scraper'),
+    CragScraper = require('./lib/CragScraper'),
+    ClimbScraper = require('./lib/ClimbScraper');
 
-function Scraper (proxy) {
-  this.proxy = proxy;
-}
-
-Scraper.prototype.crag = crag;
-
-exports.Scraper = Scraper;
+module.exports = {
+  Scraper: Scraper,
+  CragScraper: CragScraper,
+  ClimbScraper: ClimbScraper
+};

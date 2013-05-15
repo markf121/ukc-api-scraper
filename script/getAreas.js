@@ -1,5 +1,4 @@
 var utils = require('../lib/utils'),
-    request = require('request'),
     Country = require('ukc-models').Country,
     Area = require('ukc-models').Area,
     modelsLib = require('ukc-models/lib');

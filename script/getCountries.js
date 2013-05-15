@@ -1,5 +1,5 @@
 var utils = require('../lib/utils'),
-    request = require('request'),
+    Scraper = require('../Scraper'),
     Country = require('ukc-models').Country,
     modelsLib = require('ukc-models/lib');
 
@@ -7,7 +7,9 @@ var j = request.jar();
 var cookie = request.cookie('ukcsid=11ea35ca4f7c822221338f34303fa208#111303#stevoland');
 j.add(cookie);
 
-utils.scrapePage({
+var scraper = new Scraper();
+
+scraper._scrape({
   url: '/logbook/addcrag.html?id=0',
   jar: j
 }).then(
