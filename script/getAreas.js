@@ -19,8 +19,8 @@ var addArea = function (tag, country) {
     ];
   }
   modelsLib.updateOrCreate(Area, data, function (err, area) {
-    country.areas.push(area._id);
-    country.save();
+    //country.areas.push(area._id);
+    //country.save();
     console.info('Area saved: ' + data.name);
   });
 };

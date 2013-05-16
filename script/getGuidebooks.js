@@ -1,7 +1,7 @@
 var utils = require('../lib/utils'),
-    request = require('request'),
-    Country = require('ukc-models').Country,
-    Guidebook = require('ukc-models').Guidebook,
+    models = require('ukc-models')({host: "mongodb://localhost/test"}),
+    Country = models.Country,
+    Guidebook = models.Guidebook,
     modelsLib = require('ukc-models/lib');
 
 
@@ -15,8 +15,8 @@ var addGuidebook = function (tag, country) {
   data.country = country._id;
 
   modelsLib.updateOrCreate(Guidebook, data, function (err, guidebook) {
-    country.guidebooks.push(guidebook._id);
-    country.save();
+    //country.guidebooks.push(guidebook._id);
+    //country.save();
     console.info('Guidebook saved: ' + data.title);
   });
 };
