@@ -1,6 +1,7 @@
 var utils = require('../lib/utils'),
-    Country = require('ukc-models').Country,
-    Area = require('ukc-models').Area,
+    models = require('ukc-models')({host: "mongodb://localhost/test"}),
+    Country = models.Country,
+    Area = models.Area,
     modelsLib = require('ukc-models/lib');
 
 var addArea = function (tag, country) {
