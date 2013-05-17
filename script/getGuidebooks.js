@@ -2,6 +2,7 @@ var utils = require('../lib/utils'),
     models = require('ukc-models')({host: "mongodb://localhost/test"}),
     Country = models.Country,
     Guidebook = models.Guidebook,
+    GuideBookScraper = require('../lib/GuideBookScraper'),
     modelsLib = require('ukc-models/lib');
 
 
@@ -23,6 +24,11 @@ var addGuidebook = function (tag, country) {
 
 
 
-Country.find({}, function (err, docs) {
+/*Country.find({}, function (err, docs) {
   utils.fetchCountryData(docs, 'guidebook', addGuidebook);
+});*/
+
+var scraper = new GuideBookScraper(models);
+scraper.scrape(2, {
+  proxy: 'http://www-cache.reith.bbc.co.uk:80'
 });
