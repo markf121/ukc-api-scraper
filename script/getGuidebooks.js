@@ -32,7 +32,6 @@ var addGuidebook = function (tag, country) {
 var throttle = 5000;
 
 Guidebook.find({}, '_id', function (err, books) {
-  console.info(books);
   async.eachSeries(books, function (book, done) {
     console.info('Scraping ' + book._id);
     (new GuideBookScraper(models)).scrape(book._id, {
@@ -51,6 +50,16 @@ Guidebook.find({}, '_id', function (err, books) {
     console.info('All done');
   });
 });
+
+/*Guidebook.find({}, '_id year published', function (err, books) {
+  books.forEach(function (book) {
+    if (book.year) {
+      book.published = book.year.toString();
+      book.save();
+    }
+  });
+  console.log('All done');
+});*/
 
 /*var scraper = new GuideBookScraper(models);
 scraper.scrape(521, {
