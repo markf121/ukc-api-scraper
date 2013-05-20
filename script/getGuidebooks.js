@@ -31,18 +31,20 @@ var addGuidebook = function (tag, country) {
 
 var throttle = 5000;
 
-Guidebook.find({}, '_id', function (err, countries) {
-  console.info(countries);
-  async.eachSeries(countries, function (country, done) {
-    console.info('Scraping ' + country._id);
-    (new GuideBookScraper(models)).scrape(country._id, {
+Guidebook.find({}, '_id', function (err, books) {
+  console.info(books);
+  async.eachSeries(books, function (book, done) {
+    console.info('Scraping ' + book._id);
+    (new GuideBookScraper(models)).scrape(book._id, {
       proxy: 'http://www-cache.reith.bbc.co.uk:80'
     }).then(function (book) {
-      console.info('Done ' + country._id);
+      console.info('Done');
+      console.info(book);
       setTimeout(done, throttle);
     }, function (err) {
-      console.info('Done ' + country._id);
+      console.info('Done ' + book._id);
       console.error(err);
+      console.info(book);
       setTimeout(done, throttle);
     });
   }, function () {
