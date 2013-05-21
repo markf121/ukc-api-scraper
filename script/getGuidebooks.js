@@ -62,7 +62,7 @@ Guidebook.find({}, '_id', function (err, books) {
 });*/
 
 /*var scraper = new GuideBookScraper(models);
-scraper.scrape(521, {
+scraper.scrape(15, {
   proxy: 'http://www-cache.reith.bbc.co.uk:80'
 }).then(function (book) {
   console.info(book);
