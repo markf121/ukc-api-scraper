@@ -97,7 +97,7 @@ var addGrades = function (climbTypes, climbTypeData) {
           sortPosition: (i * 1000) + j,
           updated: Date.now()
         }, function (err, gradeType) {
-
+          console.info(gradeType);
         }
       );
 
