@@ -1,7 +1,8 @@
 var utils = require('../lib/utils'),
-    Scraper = require('../Scraper'),
+    Scraper = require('../lib/Scraper'),
     Country = require('ukc-models').Country,
-    modelsLib = require('ukc-models/lib');
+    modelsLib = require('ukc-models/lib'),
+    request = require('request');
 
 var j = request.jar();
 var cookie = request.cookie('ukcsid=11ea35ca4f7c822221338f34303fa208#111303#stevoland');
