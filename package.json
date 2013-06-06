@@ -30,7 +30,8 @@
     "entities": "~0.2.2",
     "vow": "~0.3.2",
     "async": "~0.2.8",
-    "dependable": "~0.2.5"
+    "dependable": "~0.2.5",
+    "convict": "~0.3.1"
   },
   "devDependencies": {
     "hotnode": "*"

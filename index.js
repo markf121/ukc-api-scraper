@@ -5,8 +5,7 @@ injector.resolve(
     Scraper,
     CragScraper,
     ClimbScraper,
-    GuidebookScraper,
-    utils
+    GuidebookScraper
   ) {
     module.exports = {
       Scraper: Scraper,
