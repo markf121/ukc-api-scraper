@@ -1,11 +1,18 @@
-var Scraper = require('./lib/Scraper'),
-    CragScraper = require('./lib/CragScraper'),
-    ClimbScraper = require('./lib/ClimbScraper'),
-    GuidebookScraper = require('./lib/GuidebookScraper');
+var injector = require('./lib/injector');
 
-module.exports = {
-  Scraper: Scraper,
-  CragScraper: CragScraper,
-  ClimbScraper: ClimbScraper,
-  GuidebookScraper: GuidebookScraper
-};
+injector.resolve(
+  function(
+    Scraper,
+    CragScraper,
+    ClimbScraper,
+    GuidebookScraper,
+    utils
+  ) {
+    module.exports = {
+      Scraper: Scraper,
+      CragScraper: CragScraper,
+      ClimbScraper: ClimbScraper,
+      GuidebookScraper: GuidebookScraper
+    };
+  }
+);
