@@ -1,4 +1,24 @@
-'''
+```
+TODO:
+
+- Refactor scraping:
+ - Separate request html
+ - convert to JS object
+ - save in backend
+
+- Tests
+
+- Scrape Climb page
+  - Votes
+  - Ticklists
+  - Ascents
+  - Ticks
+
+
+With guidebook info:
+http://www.ukclimbing.com/logbook/c.php?i=13385
+
+
 Add tick:
 
 
@@ -369,4 +389,4 @@ Set-Cookie:colours=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domai
 Set-Cookie:bbbb_name=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=.ukclimbing.com
 Set-Cookie:browserversion=0; expires=Sun, 03-Jun-2012 16:31:38 GMT; path=/; domain=.ukclimbing.com
 Set-Cookie:flexible=0; expires=Sun, 03-Jun-2012 16:31:38 GMT; path=/forums/; domain=.ukclimbing.com
-'''
+```
