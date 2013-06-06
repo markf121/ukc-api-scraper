@@ -1,5 +1,4 @@
-var utils = require('../lib/utils'),
-    request = require('request'),
+var request = require('request'),
     models = require('ukc-models')({
       host: "mongodb://localhost/test"
     }),

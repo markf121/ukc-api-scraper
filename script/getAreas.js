@@ -1,8 +1,8 @@
-var utils = require('../lib/utils'),
-    models = require('ukc-models')({host: "mongodb://localhost/test"}),
+var models = require('ukc-models')({host: "mongodb://localhost/test"}),
     Country = models.Country,
     Area = models.Area,
-    modelsLib = require('ukc-models/lib');
+    modelsLib = require('ukc-models/lib'),
+    injector = require('../lib/injector');
 
 var addArea = function (tag, country) {
   var data = {};
@@ -26,7 +26,10 @@ var addArea = function (tag, country) {
 };
 
 
-
-Country.find({}, function (err, docs) {
-  utils.fetchCountryData(docs, 'area', addArea);
-});
+injector.resolve(
+  function (utils) {
+    Country.find({}, function (err, docs) {
+      utils.fetchCountryData(docs, 'area', addArea);
+    });
+  }
+);
