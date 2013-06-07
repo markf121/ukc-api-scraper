@@ -34,7 +34,13 @@
     "convict": "~0.3.1"
   },
   "devDependencies": {
-    "hotnode": "*"
+    "hotnode": "*",
+    "chai": "~1.6.1",
+    "sinon": "~1.7.2",
+    "sinon-chai": "~2.4.0"
+  },
+  "scripts": {
+    "test": "mocha -r test/setup --recursive"
   },
   "keywords": []
 }
