@@ -1,15 +1,15 @@
-var Country = require('ukc-models').Country,
-    modelsLib = require('ukc-models/lib'),
+var modelsLib = require('ukc-models/lib'),
     request = require('request'),
     injector = require('../lib/injector');
 
 var j = request.jar();
-var cookie = request.cookie('ukcsid=11ea35ca4f7c822221338f34303fa208#111303#stevoland');
+var cookie = request.cookie('ukcsid=5fc400b2abd9c052d57686d83683ce83#111303#stevoland');
 j.add(cookie);
 
-injector.resolve(
-  function (Scraper) {
-    var scraper = new Scraper();
+injector.resolve(function (Scraper, Requester, config) {
+    var models = require('ukc-models')(config.get('database'));
+    var requester = new Requester();
+    var scraper = new Scraper(requester);
 
     scraper._scrape({
       url: '/logbook/addcrag.html?id=0',
@@ -24,7 +24,7 @@ injector.resolve(
           }
 
           var name = $el.text();
-          modelsLib.updateOrCreate(Country, {
+          modelsLib.updateOrCreate(models.Country, {
             _id: id,
             name: name,
             isUk: ((id >= 1 && id <= 4) || id == 47)
