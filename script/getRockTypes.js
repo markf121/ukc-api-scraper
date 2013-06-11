@@ -1,20 +1,23 @@
-var utils = require('../lib/utils'),
-    request = require('request'),
-    RockType = require('ukc-models').RockType;
+var request = require('request'),
+    config = require('../lib/config'),
     modelsLib = require('ukc-models/lib'),
     mongoose = require('mongoose'),
     injector = require('../lib/injector');
 
 
 var j = request.jar();
-var cookie = request.cookie('ukcsid=11ea35ca4f7c822221338f34303fa208#111303#stevoland');
+var cookie = request.cookie('ukcsid=5fc400b2abd9c052d57686d83683ce83#111303#stevoland');
 j.add(cookie);
 
-injector.resolve(function (utils) {
-  utils.scrapePage({
-    url: '/logbook/addcrag.html?id=0',
-    jar: j
-  }).then(
+injector.resolve(function (Scraper, Requester, config) {
+    var models = require('ukc-models')(config.get('database'));
+    var requester = new Requester();
+    var scraper = new Scraper(requester);
+
+    scraper._scrape({
+      url: '/logbook/addcrag.html?id=0',
+      jar: j
+    }).then(
     function (val) {
       val.$('select[name=rocktype] option').each(function (i, el) {
         var $el = this;
@@ -24,7 +27,7 @@ injector.resolve(function (utils) {
         }
 
         var name = $el.text();
-        modelsLib.updateOrCreate(RockType, {
+        modelsLib.updateOrCreate(models.RockType, {
           _id: id,
           name: name,
           updated: Date.now()
