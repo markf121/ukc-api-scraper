@@ -1,10 +1,7 @@
+[![Build Status](https://travis-ci.org/stevoland/ukc-api-scraper.png)](https://travis-ci.org/stevoland/ukc-api-scraper)
+
 ```
 TODO:
-
-- Refactor scraping:
- - Separate request html
- - convert to JS object
- - save in backend
 
 - Tests
 
