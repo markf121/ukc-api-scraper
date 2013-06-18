@@ -29,7 +29,7 @@ var difficultySplits = {
   Nordic: ['5-', '6', '7'],
   Australian: ['16', '20', '24'],
   'V-grades': ['V0+', 'V3', 'V7'],
-  Font: ['5', '6a+', '7a+'],
+  Font: ['font 5', 'f6A+', 'f7A+'],
   Scrambling: ['2', '3', '3S'],
   Aid: ['2A', '3A', '4A']
 };
