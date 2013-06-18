@@ -21,6 +21,19 @@ grades[9] = ["338|VF1A","339|VF1B","340|VF1C","341|VF2A","342|VF2B","343|VF2C","
 grades[10] = ["354|1","355|2","356|3","357|3S"];
 grades[11] = ["572|  - summit"];
 
+var difficultySplits = {
+  French: ['F5', 'F6b', 'F7a+'],
+  British: ['HS', 'E1', 'E4'],
+  UIAA: ['VI-', 'VII', 'VIII+'],
+  USA: ['5.9', '5.10d', '5.12a'],
+  Nordic: ['5-', '6', '7'],
+  Australian: ['16', '20', '24'],
+  'V-grades': ['V0+', 'V3', 'V7'],
+  Font: ['5', '6a+', '7a+'],
+  Scrambling: ['2', '3', '3S'],
+  Aid: ['2A', '3A', '4A']
+};
+
 var climbTypes = [
     'Winter',
     'Trad',
@@ -69,6 +82,8 @@ var addGradeType = function (type) {
 
 var addGrades = function (climbTypes, climbTypeData) {
   climbTypeData.forEach(function (grades, i) {
+    var currentDifficultyIndex,
+        currentGradeType;
     grades.forEach(function (grade, j) {
       var pair = grade.split('|'),
           id = parseInt(pair[0], 10),
@@ -76,6 +91,7 @@ var addGrades = function (climbTypes, climbTypeData) {
           gradePair = text.split(' - '),
           gradeType,
           gradeValue;
+      console.info(grade);
 
       if (gradePair.length > 1) {
         gradeValue = gradePair[1];
@@ -86,6 +102,24 @@ var addGrades = function (climbTypes, climbTypeData) {
         gradeValue = gradePair[0];
       }
       gradeType = gradeType || climbTypes[i - 1];
+
+      if (currentGradeType !== gradeType) {
+        currentDifficultyIndex = 0;
+        currentGradeType = gradeType;
+      }
+
+      var difficultyIndex,
+          color;
+
+      if (difficultySplits[gradeType]) {
+        difficultyIndex = difficultySplits[gradeType].indexOf(gradeValue);
+
+        if (difficultyIndex > -1) {
+          currentDifficultyIndex = difficultyIndex + 1;
+        }
+      }
+      console.info(currentDifficultyIndex);
+
       addGradeType(gradeType);
 
       modelsLib.updateOrCreate(Grade, {
@@ -94,13 +128,14 @@ var addGrades = function (climbTypes, climbTypeData) {
           climbType: i,
           type: gradeType,
           sortPosition: (i * 1000) + j,
+          difficultyGroup: currentDifficultyIndex,
           updated: Date.now()
         }, function (err, gradeType) {
           console.info(gradeType);
         }
       );
 
-      console.info(gradeType + '=' + gradeValue);
+      //console.info(gradeType + '=' + gradeValue);
     });
   });
 };

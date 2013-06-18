@@ -11,6 +11,20 @@ TODO:
   - Ascents
   - Ticks
 
+- Update crags with object for climb types:
+
+{
+  [type]: [count]
+}
+
+- Update grades with difficulties:
+
+'Aid',
+'Alpine',
+'Ice',
+'Mixed',
+'Via Ferrata',
+
 
 With guidebook info:
 http://www.ukclimbing.com/logbook/c.php?i=13385
