@@ -23,6 +23,7 @@ grades[11] = ["572|  - summit"];
 
 var difficultySplits = {
   French: ['F5', 'F6b', 'F7a+'],
+  French_Sport: ['5', '6b', '7a+'],
   British: ['HS', 'E1', 'E4'],
   UIAA: ['VI-', 'VII', 'VIII+'],
   USA: ['5.9', '5.10d', '5.12a'],
@@ -89,6 +90,7 @@ var addGrades = function (climbTypes, climbTypeData) {
           id = parseInt(pair[0], 10),
           text = pair[1],
           gradePair = text.split(' - '),
+          climbType = climbTypes[i - 1],
           gradeType,
           gradeValue;
       console.info(grade);
@@ -101,7 +103,7 @@ var addGrades = function (climbTypes, climbTypeData) {
       } else {
         gradeValue = gradePair[0];
       }
-      gradeType = gradeType || climbTypes[i - 1];
+      gradeType = gradeType || climbType;
 
       if (currentGradeType !== gradeType) {
         currentDifficultyIndex = 0;
@@ -116,6 +118,11 @@ var addGrades = function (climbTypes, climbTypeData) {
 
         if (difficultyIndex > -1) {
           currentDifficultyIndex = difficultyIndex + 1;
+        } else if (difficultySplits[gradeType + '_' + climbType]) {
+          difficultyIndex = difficultySplits[gradeType + '_' + climbType].indexOf(gradeValue);
+          if (difficultyIndex > -1) {
+            currentDifficultyIndex = difficultyIndex + 1;
+          }
         }
       }
       console.info(currentDifficultyIndex);
@@ -131,7 +138,7 @@ var addGrades = function (climbTypes, climbTypeData) {
           difficultyGroup: currentDifficultyIndex,
           updated: Date.now()
         }, function (err, gradeType) {
-          console.info(gradeType);
+          //console.info(gradeType);
         }
       );
 
