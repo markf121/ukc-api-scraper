@@ -17,6 +17,8 @@ TODO:
   [type]: [count]
 }
 
+- Update crags with isHill - based on only 'Summit'
+
 - Update grades with difficulties:
 
 'Aid',
