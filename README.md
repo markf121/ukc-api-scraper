@@ -11,26 +11,21 @@ TODO:
   - Ascents
   - Ticks
 
-- Update crags with object for climb types:
-
-{
-  [type]: [count]
-}
-
 - Update crags with isHill - based on only 'Summit'
 
 - Update grades with difficulties:
 
-'Aid',
-'Alpine',
-'Ice',
-'Mixed',
-'Via Ferrata',
+Alpine: ['PD-', 'AD', 'TD-'],
+Ice: ['WI2', 'WI3', 'WI5'],
+Mixed: ['M4', 'M5', 'M7'],
+'Via Ferrata': ['VF2A', 'VF4A', 'VF5A']
 
 
 With guidebook info:
 http://www.ukclimbing.com/logbook/c.php?i=13385
 
+Both guidebook descriptions and other:
+http://www.ukclimbing.com/logbook/c.php?i=29932
 
 Add tick:
 
