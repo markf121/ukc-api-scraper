@@ -33,7 +33,11 @@ var difficultySplits = {
   Font: ['font 5', 'f6A+', 'f7A+'],
   Scrambling: ['2', '3', '3S'],
   Aid: ['2A', '3A', '4A'],
-  Scottish: ['III', 'V', 'VII']
+  Scottish: ['III', 'V', 'VII'],
+  Alpine: ['PD-', 'AD', 'TD-'],
+  Ice: ['WI2', 'WI3', 'WI5'],
+  Mixed: ['M4', 'M5', 'M7'],
+  'Via Ferrata': ['VF2A', 'VF4A', 'VF5A']
 };
 
 var climbTypes = [
