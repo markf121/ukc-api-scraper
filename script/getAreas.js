@@ -3,7 +3,7 @@ var modelsLib = require('ukc-models/lib'),
 
 
 injector.resolve(
-  function (utils, config) {
+  function (utils, config, Scraper) {
     var models = require('ukc-models')(config.get('database'));
 
     var addArea = function (tag, country) {
@@ -12,7 +12,7 @@ injector.resolve(
         return;
       }
       data._id = parseInt(tag.$.value, 10);
-      data.name = tag.$.name;
+      data.name = Scraper.decodeEntities(tag.$.name);
       data.country = country._id;
       if (tag.$.lng && tag.$.lat) {
         data.geo = [

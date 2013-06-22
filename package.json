@@ -32,7 +32,8 @@
     "async": "~0.2.8",
     "dependable": "~0.2.5",
     "convict": "~0.3.1",
-    "bunyan": "~0.21.3"
+    "bunyan": "~0.21.3",
+    "mout": "~0.6.0"
   },
   "devDependencies": {
     "hotnode": "*",
