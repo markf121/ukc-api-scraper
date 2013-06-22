@@ -32,7 +32,8 @@ var difficultySplits = {
   'V-grades': ['V0+', 'V3', 'V7'],
   Font: ['font 5', 'f6A+', 'f7A+'],
   Scrambling: ['2', '3', '3S'],
-  Aid: ['2A', '3A', '4A']
+  Aid: ['2A', '3A', '4A'],
+  Scottish: ['III', 'V', 'VII']
 };
 
 var climbTypes = [
