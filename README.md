@@ -6,19 +6,21 @@ TODO:
 - Tests
 
 - Scrape Climb page
-  - Votes
-  - Ticklists
-  - Ascents
   - Ticks
 
-- Update crags with isHill - based on only 'Summit'
+Tick styles:
 
-- Update grades with difficulties:
+Lead β - 26/Jul/08
+Hidden - Lead RP - 24/May/08
+Hidden - Lead O/S - 2008
+Heisenberg - Lead O/S - 06/Jul/03 with fiend
+craig h - Solo O/S
 
-Alpine: ['PD-', 'AD', 'TD-'],
-Ice: ['WI2', 'WI3', 'WI5'],
-Mixed: ['M4', 'M5', 'M7'],
-'Via Ferrata': ['VF2A', 'VF4A', 'VF5A']
+Sent x - 07/Jun/13 with Charlie Torrance
+Souljah - Sent β - 06/May/13 with aliblacky
+Dan724 - Sent x - 03/May/13 with Kyle Williamson
+munch88 - Sent dnf - 17/Feb/13 with luke owens
+highrepute - Sent
 
 
 With guidebook info:
