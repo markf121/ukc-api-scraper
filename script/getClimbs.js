@@ -6,31 +6,35 @@ injector.resolve(function (ClimbScraper, config) {
   var models = require('ukc-models')(config.get('database'));
   var Climb = models.Climb;
   var throttle = 1000;
+  var i = 0;
 
   function scrapeClimb (climb, done) {
     var scraper = new ClimbScraper(models);
-    console.info(climb._id + ': ' + climb.name + ' updating');
-    scraper.scrape(climb._id).then(function () {
+    i += 1;
+    console.info(i + ': '+ climb._id + ': ' + climb.name + ': updating');
+    scraper.scrape(climb._id).always(function () {
       setTimeout(done, throttle);
     });
   }
 
-  Climb.find({
-    complete: {
-      $ne: true
-    }
-  },
-  '_id name updated',
-  {
-    sort: {
-      updated: 1
+  function findClimbs () {
+    Climb.find({
+      complete: {
+        $ne: true
+      }
     },
-    limit: 10000
-  },
-  function (err, climbs) {
-    console.info(climbs);
-    async.eachSeries(climbs, scrapeClimb, function () {
-      process.exit();
+    '_id name updated',
+    {
+      sort: {
+        updated: 1
+      },
+      limit: 10000
+    },
+    function (err, climbs) {
+      console.info(climbs);
+      async.eachSeries(climbs, scrapeClimb, findClimbs);
     });
-  });
+  }
+
+  findClimbs();
 });
