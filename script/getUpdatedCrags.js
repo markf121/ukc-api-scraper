@@ -37,7 +37,8 @@ injector.resolve(function (Requester, Scraper, config) {
             Crag.create({
               _id: id,
               name: item.title[0].replace(/\[.*?\]$/, '').trim(),
-              updateRequired: true
+              updateRequired: true,
+              geo: [0, 0]
             }, function (err, crag) {
               console.info(crag.name + ' added');
               done();
