@@ -1,7 +1,6 @@
 var request = require('request'),
     config = require('../lib/config'),
     modelsLib = require('ukc-models/lib'),
-    mongoose = require('mongoose'),
     injector = require('../lib/injector');
 
 

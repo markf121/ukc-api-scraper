@@ -29,6 +29,9 @@ http://www.ukclimbing.com/logbook/c.php?i=13385
 Both guidebook descriptions and other:
 http://www.ukclimbing.com/logbook/c.php?i=29932
 
+First ascentionist without FA:
+http://www.ukclimbing.com/logbook/c.php?i=265496
+
 Hill:
 http://www.ukclimbing.com/logbook/crag.php?id=13478
 
