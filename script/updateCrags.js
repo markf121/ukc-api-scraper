@@ -9,6 +9,7 @@ injector.resolve(function (CragScraper, config) {
 
   function scrapeCrag (crag, done) {
     var scraper = new CragScraper(models);
+    console.info(crag._id + ': ' + crag.name);
     scraper.scrape(crag._id).then(function () {
       console.info(crag.name + ' updated');
       setTimeout(done, throttle);
