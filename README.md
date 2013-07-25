@@ -1,13 +1,14 @@
+# ukc-api-scraper
+
 [![Build Status](https://travis-ci.org/stevoland/ukc-api-scraper.png)](https://travis-ci.org/stevoland/ukc-api-scraper)
 
+Scrape UKC data into ukc-models
+
+## todo
+
+* Scrape ticks
+
 ```
-TODO:
-
-- Tests
-
-- Scrape Climb page
-  - Ticks
-
 Tick styles:
 
 Lead β - 26/Jul/08
