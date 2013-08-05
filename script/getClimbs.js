@@ -5,7 +5,7 @@ var injector = require('../lib/injector'),
 injector.resolve(function (ClimbScraper, config) {
   var models = require('ukc-models')(config.get('database'));
   var Climb = models.Climb;
-  var throttle = 1000;
+  var throttle = 2000;
   var i = 0;
 
   function scrapeClimb (climb, done) {
@@ -31,7 +31,10 @@ injector.resolve(function (ClimbScraper, config) {
       limit: 10000
     },
     function (err, climbs) {
-      console.info(climbs);
+      if (!climbs.length) {
+        console.info('All done');
+        process.exit();
+      }
       async.eachSeries(climbs, scrapeClimb, findClimbs);
     });
   }
