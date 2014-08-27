@@ -32,7 +32,7 @@ injector.resolve(function (CragScraper, ClimbScraper, config) {
 
   Crag.find({updateRequired: true}, function (err, crags) {
     async.eachSeries(crags, scrapeCrag, function () {
-      process.exit();
+      //process.exit();
     });
   });
 });

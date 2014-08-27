@@ -46,7 +46,7 @@ injector.resolve(function (Requester, Scraper, config) {
           }
         });
       }, function () {
-        process.exit(0);
+        //process.exit(0);
       });
     });
   });

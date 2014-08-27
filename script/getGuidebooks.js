@@ -5,7 +5,7 @@ var models = require('ukc-models')({host: "mongodb://localhost/test"}),
     async = require('async'),
     injector = require('../lib/injector');
 
-injector.resolve(function (utils, GuideBookScraper) {
+injector.resolve(function (utils, GuidebookScraper) {
   var addGuidebook = function (tag, country) {
     var data = {};
     if (!tag.$.value) {
@@ -33,9 +33,7 @@ injector.resolve(function (utils, GuideBookScraper) {
   Guidebook.find({}, '_id', function (err, books) {
     async.eachSeries(books, function (book, done) {
       console.info('Scraping ' + book._id);
-      (new GuideBookScraper(models)).scrape(book._id, {
-        proxy: 'http://www-cache.reith.bbc.co.uk:80'
-      }).then(function (book) {
+      (new GuidebookScraper(models)).scrape(book._id).then(function (book) {
         console.info('Done');
         console.info(book);
         setTimeout(done, throttle);
