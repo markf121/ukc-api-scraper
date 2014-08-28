@@ -1,9 +1,17 @@
+var path = require('path');
+
+// Hack to run script code multiple times
+function requireAndInvalidate (path) {
+  require(path);
+  delete require.cache[require.resolve(path)];
+}
+
 function markUpdatedCrags () {
-  require('./getUpdatedCrags');
+  requireAndInvalidate('./getUpdatedCrags');
 }
 
 function updateCrags () {
-  require('./updateCrags');
+  requireAndInvalidate('./updateCrags');
 }
 
 // Mark hourly
